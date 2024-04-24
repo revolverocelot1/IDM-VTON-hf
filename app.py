@@ -12,6 +12,31 @@ from transformers import (
 from diffusers import DDPMScheduler,AutoencoderKL
 from typing import List
 
+import subprocess
+
+# Define a function to run a shell command
+def run_shell_command(command):
+    try:
+        subprocess.run(command, shell=True, check=True)
+        print(f"Command executed successfully: {command}")
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing command: {command}")
+        print(f"Error message: {e}")
+
+# Install aria2
+run_shell_command("apt -y install -qq aria2")
+
+# Download densepose model
+run_shell_command("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/densepose/model_final_162be9.pkl -d /home/xlab-app-center/ckpt/densepose -o model_final_162be9.pkl")
+
+# Download humanparsing models
+run_shell_command("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/humanparsing/parsing_atr.onnx -d /home/xlab-app-center/ckpt/humanparsing -o parsing_atr.onnx")
+run_shell_command("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/humanparsing/parsing_lip.onnx -d /home/xlab-app-center/ckpt/humanparsing -o parsing_lip.onnx")
+
+# Download openpose model
+run_shell_command("aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/openpose/ckpts/body_pose_model.pth -d /home/xlab-app-center/ckpt/openpose/ckpts -o body_pose_model.pth")
+
+
 import torch
 import os
 from transformers import AutoTokenizer
