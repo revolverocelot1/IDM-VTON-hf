@@ -22,8 +22,3 @@ fvcore
 cloudpickle
 omegaconf
 pycocotools
-!apt -y install -qq aria2
-!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/densepose/model_final_162be9.pkl -d /home/xlab-app-center/ckpt/densepose -o model_final_162be9.pkl
-!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/humanparsing/parsing_atr.onnx -d /home/xlab-app-center/ckpt/humanparsing -o parsing_atr.onnx
-!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/humanparsing/parsing_lip.onnx -d /home/xlab-app-center/ckpt/humanparsing -o parsing_lip.onnx
-!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/camenduru/IDM-VTON/resolve/main/openpose/ckpts/body_pose_model.pth -d /home/xlab-app-center//ckpt/openpose/ckpts -o body_pose_model.pth
